@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        alarm_img = findViewById(R.id.alarm_list)
+        alarm_img = findViewById(R.id.alarmImages)
         alarm_img.setBackgroundResource((R.drawable.alarm_list))
         alarm_animation = alarm_img.background as AnimationDrawable
-        heart_img = findViewById(R.id.heart_list)
+        heart_img = findViewById(R.id.heartImages)
         heart_img.setBackgroundResource((R.drawable.heart_list))
         heart_animation = heart_img.background as AnimationDrawable
     }
