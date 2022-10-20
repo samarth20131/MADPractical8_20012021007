@@ -3,36 +3,58 @@ package com.example.madpractical8_20012021007
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 
-class MainActivity : AppCompatActivity() {
 
-    lateinit var alarm_img : ImageView
-    lateinit var heart_img : ImageView
-    lateinit var alarm_animation : AnimationDrawable
-    lateinit var heart_animation : AnimationDrawable
-
-
+class MainActivity : AppCompatActivity(), Animation.AnimationListener {
+    lateinit var alarmimgs : ImageView
+    lateinit var alarmimg_frameByFrameAnimation : AnimationDrawable
+    lateinit var alarmimgAnimation : Animation
+    lateinit var heartimgs : ImageView
+    lateinit var heart_frameByFrameAnimation : AnimationDrawable
+    lateinit var heartAnimation : Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        alarm_img = findViewById(R.id.alarmImages)
-        alarm_img.setBackgroundResource((R.drawable.alarm_list))
-        alarm_animation = alarm_img.background as AnimationDrawable
-        heart_img = findViewById(R.id.heartImages)
-        heart_img.setBackgroundResource((R.drawable.heart_list))
-        heart_animation = heart_img.background as AnimationDrawable
-    }
 
+        alarmimgs = findViewById(R.id.alarmImages)
+        alarmimgs.setBackgroundResource(R.drawable.alarm_list)
+
+        heartimgs = findViewById(R.id.heartImages)
+        heartimgs.setBackgroundResource(R.drawable.heart_list)
+
+        alarmimg_frameByFrameAnimation = alarmimgs.background as AnimationDrawable
+
+        heart_frameByFrameAnimation = heartimgs.background as AnimationDrawable
+
+        alarmimgAnimation = AnimationUtils.loadAnimation(this, R.anim.alarm_animation)
+        alarmimgAnimation.setAnimationListener(this)
+
+        heartAnimation = AnimationUtils.loadAnimation(this, R.anim.heart_animation)
+        alarmimgAnimation.setAnimationListener(this)
+    }
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
+
         if(hasFocus){
-            alarm_animation.start()
-            heart_animation.start()
+            alarmimg_frameByFrameAnimation.start()
+            alarmimgs.startAnimation(alarmimgAnimation)
+
+            heart_frameByFrameAnimation.start()
+            heartimgs.startAnimation(heartAnimation)
         }
-        else{
-            alarm_animation.stop()
-            heart_animation.stop()
-        }
+    }
+    override fun onAnimationStart(p0: Animation?) {
+
+    }
+
+    override fun onAnimationEnd(p0: Animation?) {
+
+    }
+
+    override fun onAnimationRepeat(p0: Animation?) {
+
     }
 }
